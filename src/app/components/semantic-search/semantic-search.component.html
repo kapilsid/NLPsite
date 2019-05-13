@@ -1,0 +1,267 @@
+<div class="container">
+    <h4>Semantic Search</h4>
+
+    <h5>Search</h5>
+    Search as understood with Google is search without context where all 
+    the text in the pages is converted into words. Common or stop words removed and 
+    reverse index is created.
+    Now, when somebody searches a 'word' index is looked into and the pages which had 
+    those words are displayed as summary.   
+
+    <h5>Semantic Search</h5>
+    <p>Semantic Technology can be explained better with analogy comparison with RDBMS SQL 
+    instead of Search.</p> 
+    <p>  
+    Semantic Technology takes a normal unorganized text and converts into a structured meaningful text (similar to RDBMS database) which can be queried using SPARQL (similar SQL queries)
+  </p>
+    In this blog, I take an example of a random text from a history book. Then, explain how it is converted to RDF and then what becomes possible on this RDF.
+    <h6>Article</h6>
+    <pre>
+    “One of the most famous stories of decipherment comes from Egypt, a country in north Africa where there were kings and queens about 5000
+    years ago.Rosetta is a town on the north coast of Egypt, and here an inscribed stone was found, which contained inscriptions in three 
+    different languages and scripts (Greek, and two forms of Egyptian). Scholars who could read Greek figured out that the names of kings 
+    and queens were enclosed in a little frame, called a cartouche. They then placed the Greek and the Egyptian signs side by side, and 
+    identified the sounds for which the Egyptian letters stood. As you can see, a lion stood for L, and a bird for A. Once they knew what 
+    the letters stood for, they could read other inscriptions as well.”
+     </pre>
+      <h6>The text is converted in RDF Tuples:</h6>
+
+       <p>
+        <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+          Show Generated RDF Tupple
+        </button>
+      </p>
+      <div id="collapseExample" [ngbCollapse]="isCollapsed">
+        <div class="card">
+          <div class="card-body">
+              <code class="separator" style="background-color: #fff; text-align: left;"><strong><br>
+                &lt;?xml version="1.0"?&gt;<br>
+                &lt;rdf:RDF <br>
+                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" <br>
+                xmlns:owl="http://www.w3.org/2002/07/owl#" <br>
+                xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" <br>
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema#" <br>
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#" <br>
+                xml:base="http://xmlns.temp.org/rdf/" <br>
+                xmlns:prop="http://xmlns.temp.org/rdf/property/" <br>
+                xmlns:report="http://xmlns.temp.org/rdf/report/"<br>
+                xmlns:med="http://127.0.0.1/ontology/my.owl/" <br>
+                &gt;<br>
+                &lt;rdf:Description rdf:about="http://xmlns.temp.org/rdf/Famous stories of decipherment"&gt; <br>
+                &lt;rdf:type&gt;#Story&lt;/rdf:type&gt; <br>
+                &lt;prop:come_from  resource="http://xmlns.temp.org/rdf/Egypt"/&gt;<br>
+                &lt;prop:decipher  resource="http://xmlns.temp.org/rdf/inscribed stone"/&gt;<br>
+                &lt;/rdf:Description&gt;<br>
+                <br>
+                &lt;rdf:Description rdf:about="http://xmlns.temp.org/rdf/Egypt"&gt; <br>
+                &lt;rdf:type&gt;#Country&lt;/rdf:type&gt; <br>
+                &lt;prop:in&gt;http://xmlns.temp.org/rdf/North Africa&lt;/prop:in&gt; <br>
+                &lt;prop:where_there_were&gt; kings and queens about 5000 years ago&lt;/prop:where_there_were&gt; <br>
+                &lt;prop:circumtances&gt; about 5000 years ago&lt;/prop:circumtances&gt; <br>
+                &lt;/rdf:Description&gt;<br>
+                <br>
+                &lt;rdf:Description rdf:about="http://xmlns.temp.org/rdf/Rosetta"&gt; <br>
+                &lt;rdf:type&gt;#Place&lt;/rdf:type&gt; <br>
+                &lt;prop:north_coast resource="http://xmlns.temp.org/rdf/Egypt"/&gt;<br>
+                &lt;prop:found rdf:resource="http://xmlns.temp.org/rdf/inscribed stone"/&gt; <br>
+                &lt;/rdf:Description&gt;<br>
+                <br>
+                &lt;rdf:Description rdf:about="http://xmlns.temp.org/rdf/inscribed stone"&gt; <br>
+                &lt;prop:contained&gt; <br>
+                inscriptions in three different languages and scripts Greek and two forms of Egyptian<br>
+                &lt;/prop:contained&gt; <br>
+                &lt;prop:read_by  resource="http://xmlns.temp.org/rdf/Scholars"/&gt;<br>
+                &lt;/rdf:Description&gt;<br>
+                <br>
+                <br>
+                &lt;rdf:Description rdf:about="http://xmlns.temp.org/rdf/Scholars"&gt; <br>
+                &lt;rdf:type&gt;#Profession&lt;/rdf:type&gt; <br>
+                &lt;prop:qualification&gt;read Greek&lt;/prop:qualification&gt;<br>
+                &lt;prop:figured rdf:resource="http://xmlns.temp.org/rdf/cartouche"/&gt; <br>
+                &lt;prop:method_of_reading  resource="http://xmlns.temp.org/rdf/Decipher Method"/&gt;<br>
+                <br>
+                &lt;/rdf:Description&gt;<br>
+                <br>
+                <br>
+                &lt;rdf:Description rdf:about="http://xmlns.temp.org/rdf/cartouche"&gt; <br>
+                &lt;prop:comment&gt; <br>
+                names of kings and queens were enclosed in a little frame <br>
+                &lt;/prop:comment&gt;<br>
+                &lt;/rdf:Description&gt;<br>
+                <br>
+                <br>
+                &lt;rdf:Description rdf:about="http://xmlns.temp.org/rdf/Decipher Method"&gt; <br>
+                &lt;prop:identified&gt; <br>
+                the sounds for which the Egyptian letters stood <br>
+                &lt;/prop:identified &gt;<br>
+                &lt;prop:method&gt;<br>
+                placed the Greek and the Egyptian signs side by side  <br>
+                &lt;/prop:method&gt;  <br>
+                &lt;prop:result&gt;<br>
+                a lion stood for L, and a bird for A <br>
+                &lt;/prop:result&gt; <br>
+                &lt;prop:coud_read  resource="http://xmlns.temp.org/rdf/Other Inscriptions"/&gt;<br>
+                &lt;/rdf:Description&gt;<br>
+                &lt;rdf:Description rdf:about="http://xmlns.temp.org/rdf/Other Inscriptions"&gt; <br>
+                &lt;prop:condition&gt;<br>
+                Once they knew what the letters stood for<br>
+                &lt;/prop:condition&gt;  <br>
+                &lt;/rdf:Description&gt;<br>
+                <br>
+                &lt;/rdf:RDF&gt;<br>
+                </strong>
+              </code>
+          </div>
+        </div>
+      </div>
+
+       <p>
+        <button type="button" class="btn btn-outline-primary" (click)="isJenaCollapsed = !isJenaCollapsed"
+                  [attr.aria-expanded]="!isJenaCollapsed" aria-controls="collapseExample2">
+            Show JENA Visualizer
+        </button>
+        </p>
+        <div id="collapseExample2" [ngbCollapse]="isJenaCollapsed">
+          <div class="card">
+            <div class="card-body">
+                <img src="assets/jena1.png">
+                <img src="assets/jena2.png">
+            </div>
+          </div>
+        </div>
+        SPARQL Queries  
+        
+        <p>
+        <button type="button" class="btn btn-outline-primary" (click)="isQCollapsed = !isQCollapsed"
+                  [attr.aria-expanded]="!isQCollapsed" aria-controls="collapseQ">
+            Show Query1 
+        </button>
+        </p>
+        <div id="collapseQ" [ngbCollapse]="isQCollapsed">
+          <div class="card">
+            <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                      <strong>Question:</strong>
+                      <h6>Query in English</h6>
+                      Where did the stories of decipherment come from? Also tell about that place?<br>
+                      <strong>Query in equivalent SparQL</strong>
+                      <br>
+                      <code>
+                      BASE <br> 
+                      PREFIX rdf: <br>
+                      PREFIX rdfs: <br>
+                      PREFIX prop: <br>
+                      PREFIX report: <br>
+                      SELECT $object $relation $value <br>
+                      WHERE  <br> &#123; <br>
+                        ?subject ?property ?object .  <br>
+                        ?object ?relation ?value   <br>
+                        FILTER (REGEX(STR(?subject), "Famous stories of decipherment", "i") 
+                        )  <br>
+                        FILTER (REGEX(STR(?property), "come", "i"))  <br>
+                        FILTER (REGEX(STR(?relation), "", "i")) <br>
+                          &#125;
+                        <br>
+                        
+                      </code>
+                  </div>
+                  <div class="col-md-6">
+                      <h5>Result</h5>
+                      
+                      <table border="1">
+                          <tr style="background-color: gray;color:white">
+                            <td>Object</td>
+                            <td>Relation</td>
+                            <td>Value</td>
+                          </tr>
+                          <tr>
+                              <td>Egypt</td>
+                              <td>Circumtances</td>
+                              <td>about 5000 years ago</td>
+                            </tr>
+                            <tr>
+                                <td>Egypt</td>
+                                <td>property/where_there_was</td>
+                                <td>kings and queens about 5000 years ago</td>
+                              </tr>
+                              <tr>
+                                  <td>Egypt</td>
+                                  <td>property/in</td>
+                                  <td>North Africa</td>
+                                </tr>  
+                        </table>
+                        <br> <br> <br> <br>
+                        <h6>In english:</h6>
+                         Scholars identified "the stories of decipherment come from Egypt in North Africa where were kings and queens about 5000 years ago"
+                  </div>
+                </div>
+                
+  
+            </div>
+          </div>
+        </div>
+        
+        <p>
+            <button type="button" class="btn btn-outline-primary" (click)="isQCollapsed1 = !isQCollapsed1"
+                      [attr.aria-expanded]="!isQCollapsed1" aria-controls="collapseQ1">
+                Show Query2 
+            </button>
+            </p>
+            <div id="collapseQ1" [ngbCollapse]="isQCollapsed1">
+              <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                    <strong>Question:</strong>
+                    <h6>Query in English</h6>
+                    What could Scholars identify?<br>
+                    <strong>Query in equivalent SparQL</strong>
+                    <br>
+                    <code>
+                    BASE <br> 
+                    PREFIX rdf: <br>
+                    PREFIX rdfs: <br>
+                    PREFIX prop: <br>
+                    PREFIX report: <br>
+                    SELECT $subject $relation $value <br>
+                    WHERE  <br> &#123; <br>
+                      ?subject ?property ?object .  <br>
+                      ?object ?relation ?value   <br>
+                      FILTER (REGEX(STR(?subject), "Scholars", "i") 
+                      )<br>
+                      FILTER (REGEX(STR(?relation), "identified", "i") 
+                      )<br>
+                        &#125;
+                      <br>
+                      
+                    </code>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Result</h5>
+                        <table border="1">
+                            <tr>
+                              <td>subject</td>
+                              <td>&lt;http://xmlns.temp.org/rdf/Scholars&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>relation</td>
+                                <td>&lt;http://xmlns.temp.org/rdf/property/identified&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>Value</td>  
+                                <td>the sounds for which the Egyptian letters stood</td>
+                              </tr>
+                          </table>
+                          <br> <br> <br> <br>
+                          <h6>In english:</h6>
+                           Scholars identified "the sounds for which the Egyptian letters stood"
+
+
+                    </div>
+                </div>
+              </div>
+            </div>
+    </div>
+    

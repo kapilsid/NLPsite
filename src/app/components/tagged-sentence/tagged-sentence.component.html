@@ -1,0 +1,24 @@
+
+
+<span *ngFor="let st of myitem">
+    <span *ngIf="st.isentity;then content else other_content"></span>
+    
+    <ng-template class="text-justify" #content>
+        <ng-template #popContent>{{st.popcontent}} <br/><br/>
+            <div *ngFor="let o of st.morecontent"> 
+                    <b>{{o.key}}</b>: {{o.value}}    
+            </div>         
+        </ng-template>
+
+        <ng-template #popTitle><h2>{{st.title}}</h2></ng-template>
+        
+        <button class="btn" [ngbPopover]="popContent" 
+        [popoverTitle]="popTitle" [ngStyle]="{'background-color': getBGColor(st.type)}" 
+        triggers="mouseenter:mouseleave" type="button"> {{st.content}} </button>
+    
+    </ng-template>
+
+    <ng-template #other_content>{{st.content}}
+    </ng-template>
+    
+</span>

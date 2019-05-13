@@ -1,0 +1,95 @@
+
+<h3>Tag sentences</h3>
+Enter some text and press tag. 
+<hr>
+<div class="row">
+  <div class="col-md-10">
+    <form action="">
+      <div class="form-group">
+        <label for="mtext">Enter Text</label>
+          <textarea
+          ngModel 
+          [(ngModel)]="mtext"
+          #mytext="ngModel"   
+          cols = "100"
+          rows = "5"
+          name="mtext" id="mtext" class="form-control">
+          </textarea>
+      </div>
+      <button 
+        (click)="tagSentences()" 
+        class="btn btn-primary float-right">
+          Tag
+      </button>
+    </form>
+  </div>
+  
+  <div class="col-md-2">
+  <br/><br/><br/>
+      <div *ngIf="wdisplay">
+        <div class="card ">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"> Lang -  {{lang}} </li>
+                <li class="list-group-item">{{topic}}</li>
+              </ul>
+        </div>
+  </div>
+</div>
+
+
+ <div class="row">
+    
+  <div id="result" class="col-md-8">
+      <div class="card"  *ngFor="let sent of sentences;let i = index">
+          <app-tagged-sentence [item]="taggedSentence[i]"></app-tagged-sentence>
+          <div class="card-body">
+              <Button 
+              class="btn-primary"
+              (click)="showNouns(i)"
+              >Analyze</Button>
+              <div> {{formatTags[i]}}</div> 
+            
+          </div>
+          <div> {{sent.chunks}}</div> 
+          
+        </div>
+  </div>
+  
+
+  <div class="col-md-4" *ngIf="display || sentis[tab]">
+      <div class="card">
+          <h3 class="card-header">Sentiments</h3>
+          <div class="card-body">
+              <div [style.fontWeight]="sentis[tab].neg>0.5 ? 'bold':'100' "
+                  [style.color]="sentis[tab].neg>sentis[tab].pos ? 'red':'black' ">
+                  Negative : {{sentis[tab].neg}} 
+              </div> 
+              <div [style.fontWeight]="sentis[tab].pos>0.5 ? 'bold':'100' "
+                  [style.color]="sentis[tab].pos>sentis[tab].neg ? 'green':'black' ">
+                  Positive : {{sentis[tab].pos}} 
+              </div> 
+              <div [style.fontWeight]="sentis[tab].neu>0.5 ? 'bold':'100' ">
+                  Neutral :  {{sentis[tab].neu}}
+                </div> 
+        </div>
+      </div>
+    <div class="card">
+        <h3 class="card-header">Nouns</h3>
+        <div class="card-body">
+         <div *ngFor="let nn of Nouns[tab]">
+              {{nn}}
+          </div>
+      </div>
+    </div>
+    <div class="card">
+        <h3 class="card-header">Noun Phrases</h3>
+        <div class="card-body">
+         <div *ngFor="let np of NP[tab]">
+              {{np}}
+          </div>
+      </div>
+    </div>
+    
+   
+  </div>
+</div>

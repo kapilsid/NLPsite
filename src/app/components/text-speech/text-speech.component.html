@@ -1,0 +1,40 @@
+<h3>Read out Aloud</h3>
+Enter text and Convert. 
+<hr>
+<div class="row">
+  <div class="col-md-11">
+    <form action="">
+      <div class="row">
+        <div class="col-md-9">
+            <div class="form-group">
+                <label for="mytext">Enter text (300 characters)</label>
+                <textarea  ngModel [(ngModel)]="mytext" 
+                  #imgurl="ngModel" 
+                  (ngModelChange)="clearFaces()"
+                  name="mytext" id="mytext" class="form-control"
+                  cols="30" rows="10">
+               </textarea>  
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="selVoice">Select a Voice</label> <br>
+                <select name="selVoice" id="selVoice" [(ngModel)]="selVoice">
+                    <option *ngFor="let v of voices" [ngValue]="v">{{v}}</option>
+                </select>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                  <button (click)="convert(mytext)" class="btn btn-primary btn-block">
+                    Speak to Me</button>
+             </div>
+            </div>
+             <button *ngIf="audioPath" (click)="speek()" class="btn btn-primary">Play</button>
+             <audio *ngIf="audioPath" [src]="audioPath">Play</audio>
+
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  

@@ -1,0 +1,7 @@
+{
+  "universal": {
+    "project": "tag-service",
+    "skipInstall": false,
+    "directory": "."
+  }
+}
